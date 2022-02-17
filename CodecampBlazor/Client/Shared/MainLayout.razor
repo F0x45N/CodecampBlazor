@@ -6,43 +6,58 @@
 
 <MudLayout>
     <MudAppBar Elevation="25">
-        <MudHidden Breakpoint="Breakpoint.SmAndDown">
-            <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />
-        </MudHidden>
-        <MudHidden Breakpoint="Breakpoint.MdAndUp">
-            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        </MudHidden>
-        <MudHidden Breakpoint="Breakpoint.Xs">
-            <MudText Typo="Typo.h6" Class="ml-4">CodecampBlazor</MudText>
-        </MudHidden>
-        <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
-            <MudText Typo="Typo.subtitle2">CodecampBlazor</MudText>
-        </MudHidden>
-        <MudSpacer />
-        <MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
-            <MudMenuItem>English</MudMenuItem>
-            <MudMenuItem>Swedish</MudMenuItem>
-            <MudMenuItem>Old Norse</MudMenuItem>
-        </MudMenu>
-        <MudMenu Icon="@Icons.Material.Outlined.Widgets" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
-            <MudMenuItem Link="https://mudblazor.com/">MudBlazor</MudMenuItem>
-            <MudMenuItem Link="https://github.com/Garderoben/CodecampBlazors">Source Code</MudMenuItem>
-        </MudMenu>
-        <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
-            <ActivatorContent>
-                <MudAvatar Image="images/avatar_jonny.jpg" />
-            </ActivatorContent>
-            <ChildContent>
-                <PersonCard Class="mt-n2" />
-                <MudDivider Class="mb-2" />
-                <MudListItem Text="Account" Icon="@Icons.Material.Outlined.Person" Href="/personal/account" />
-                <MudListItem Text="Logout" Icon="@Icons.Material.Outlined.Login" Href="/pages/authentication/login" />
-            </ChildContent>
-        </MudMenu>
+        <MudGrid>
+            <MudItem xs="2" Class="d-flex flex-wrap align-content-center">
+                <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                    <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />
+                </MudHidden>
+
+                <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                    <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                </MudHidden>
+
+                <MudHidden Breakpoint="Breakpoint.Xs">
+                    <MudText Typo="Typo.h6" Class="ml-4">CodecampBlazor</MudText>
+                </MudHidden>
+
+                <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
+                    <MudText Typo="Typo.subtitle2">CodecampBlazor</MudText>
+                </MudHidden>
+            </MudItem>
+            <MudItem xs="7"/>
+            <MudItem xs="3" Class="d-flex flex-wrap align-content-center">
+                <MudTextField @bind-Value="_search" Style="@($"background:{Colors.Grey.Lighten5}; border-radius: 6px;")" Placeholder="Search" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Search" AdornmentColor="Color.Secondary" Margin="Margin.Dense" />
+
+                <MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+                    <MudMenuItem>English</MudMenuItem>
+                    <MudMenuItem>Swedish</MudMenuItem>
+                    <MudMenuItem>Old Norse</MudMenuItem>
+                </MudMenu>
+
+                <MudMenu Icon="@Icons.Material.Outlined.Widgets" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+                    <MudMenuItem Link="https://mudblazor.com/">MudBlazor</MudMenuItem>
+                    <MudMenuItem Link="https://github.com/Garderoben/CodecampBlazors">Source Code</MudMenuItem>
+                </MudMenu>
+
+                <MudMenu Direction="Direction.Left" OffsetX="true" Dense="true" Class="ml-4">
+                    <ActivatorContent>
+                        <MudAvatar Image="images/avatar_jonny.jpg" />
+                    </ActivatorContent>
+                    <ChildContent>
+                        <PersonCard Class="mt-n2" />
+                        <MudDivider Class="mb-2" />
+                        <MudListItem Text="Account" Icon="@Icons.Material.Outlined.Person" Href="/personal/account" />
+                        <MudListItem Text="Logout" Icon="@Icons.Material.Outlined.Login" Href="/pages/authentication/login" />
+                    </ChildContent>
+                </MudMenu>
+            </MudItem>
+        </MudGrid>
     </MudAppBar>
+
     <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always">
         <NavMenu />
     </MudDrawer>
+
     <MudMainContent>
         <MudHidden Breakpoint="Breakpoint.SmAndDown">
             <MudToolBar DisableGutters="true">
@@ -64,6 +79,7 @@
     private MudBlazorAdminDashboard _theme = new();
 
     public bool _drawerOpen = true;
+    public string? _search { get; set; }
 
     void DrawerToggle()
     {
